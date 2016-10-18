@@ -1,0 +1,13 @@
+.chocolateCard img {
+	height: 200px;
+}
+
+.chocolateCard {
+	background-color: cornsilk;
+	margin-bottom: 30px;
+	padding: 20px;
+}
+
+h3 {
+	margin-top: 0px;
+}

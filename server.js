@@ -22,16 +22,28 @@ app.use(stormpath.init(app, {
 }));
 
 
-//bootstrap css
-app.get('/css/bootstrap.min.css', function (req, res) {
-  res.sendFile(path.join(__dirname, 'build/css/bootstrap.min.css'));
+
+// // bootstrap css
+// app.get('/css/bootstrap.min.css', function (req, res) {
+//   res.sendFile(path.join(__dirname, 'build/css/bootstrap.min.css'));
+// });
+
+app.use(express.static(__dirname + '/build'));
+app.get('/', (req, res) => {
+ res.sendFile(__dirname + '/build/index.html');
 });
 
 
-//everything else
-app.get('*', function (req, res) {
-  res.sendFile(path.join(__dirname, 'build/index.html'));
-});
+
+
+
+
+
+
+// // everything else
+// app.get('*', function (req, res) {
+//   res.sendFile(path.join(__dirname, 'build/index.html'));
+// });
 
 
 //server
