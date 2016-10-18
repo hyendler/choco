@@ -8,13 +8,13 @@ module.exports = {
   devtool: 'eval-source-map',
   output: {
     path: __dirname,
-    filename: 'app.js',
+    filename: 'bundle.js',
     publicPath: '/js/'
   },
   module: {
     loaders: [{
       test: /\.js$/,
-      loaders: ['babel'],
+      loaders: ['babel-loader'],
       include: path.join(__dirname, 'src')
     }]
   }
