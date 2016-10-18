@@ -1,3 +1,13 @@
+.navbar-default {
+	background-color: #f1e6bb;
+	border-color: #e2caa2;
+}
+
+.navbar-brand {
+	padding: 5px;
+}
+
+
 .chocolateCard img {
 	height: 200px;
 }
@@ -11,3 +21,4 @@
 h3 {
 	margin-top: 0px;
 }
+

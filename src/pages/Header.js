@@ -8,9 +8,11 @@ export default class Header extends React.Component {
       <nav className="navbar navbar-default navbar-static-top">
         <div className="container">
           <div id="navbar-collapse" className="collapse navbar-collapse">
-            <ul className="nav navbar-nav">
-              <li><Link to="/">Home</Link></li>
-            </ul>
+            <div className="navbar-header">
+              <Link className="navbar-brand" href="/">
+                <img src="imgs/choco-logo.png" />
+              </Link>
+            </div>
             <ul className="nav navbar-nav navbar-right">
               <NotAuthenticated>
                 <li>
