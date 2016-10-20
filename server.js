@@ -1,12 +1,17 @@
-var webpack = require('webpack');
-var config = require('./webpack.config');
+var webpack     = require('webpack');
+var config      = require('./webpack.config');
 
-var express = require('express');
-var stormpath = require('express-stormpath');
-var app = express();
-var path = require('path');
-
-var compiler = webpack(config);
+var express     = require('express');
+var stormpath   = require('express-stormpath');
+var app         = express();
+var path        = require('path');
+var db          = require('./server/model/db')
+var logger      = require('morgan')
+var cookieParser = require('cookie-parser')
+var bodyParser  = require('body-parser')
+var compiler    = webpack(config);
+var chocolate   = require('./server/model/chocolates')
+var chocolateController = require('./server/routes/chocolates_controller')
 
 // webpack
 app.use(require('webpack-dev-middleware')(compiler, {
@@ -21,18 +26,18 @@ app.use(stormpath.init(app, {
   }
 }));
 
+//body parser
+app.use(bodyParser.urlencoded({extended: true}))
 
-
-// // bootstrap css
-// app.get('/css/bootstrap.min.css', function (req, res) {
-//   res.sendFile(path.join(__dirname, 'build/css/bootstrap.min.css'));
-// });
-
+//
 app.use(express.static(__dirname + '/build'));
+
+
 app.get('/', (req, res) => {
  res.sendFile(__dirname + '/build/index.html');
 });
 
+app.use('/', chocolateController);
 
 
 
