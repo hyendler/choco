@@ -8,6 +8,7 @@ export default class IndexPage extends React.Component {
     return (
       <div className="container">
         <ChocolateList data={this.props.data} />
+        <NewChocolateBox />
       </div>
     )
   }
