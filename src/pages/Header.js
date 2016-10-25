@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router'
-import { LoginLink, LogoutLink, Authenticated, NotAuthenticated } from 'react-stormpath'
+{ /* import { LoginLink, LogoutLink, Authenticated, NotAuthenticated } from 'react-stormpath' */ }
 
 export default class Header extends React.Component {
   render() {
@@ -14,6 +14,7 @@ export default class Header extends React.Component {
               </Link>
             </div>
             <ul className="nav navbar-nav navbar-right">
+              {/*
               <NotAuthenticated>
                 <li>
                   <LoginLink />
@@ -24,6 +25,7 @@ export default class Header extends React.Component {
                   <Link to="/register">Register</Link>
                 </li>
               </NotAuthenticated>
+              */}
             </ul>
           </div>
         </div>

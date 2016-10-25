@@ -1,6 +1,6 @@
 import React from 'react';
 import ChocolateCard from '../components/ChocolateCard'
-import data from '../../build/data'
+import data from '../../static/data'
 
 export default class ChocolateList extends React.Component {
 	render() {
