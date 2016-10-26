@@ -24,7 +24,7 @@ const NewChocolateForm = React.createClass({
 				</div>
 				<div className="form-group">
 					<label>Origin of Beans </label>
-					<input type="text" value={this.props.beanOrigin} onChange={this.handleChange('beanOrigin')} />
+					<input type="text" className="form-control" value={this.props.beanOrigin} onChange={this.handleChange('beanOrigin')} />
 				</div>
 				<div className="form-group">
 					<label>Main Ingredients </label>
