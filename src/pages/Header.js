@@ -2,8 +2,18 @@ import React from 'react'
 import { Link } from 'react-router'
 { /* import { LoginLink, LogoutLink, Authenticated, NotAuthenticated } from 'react-stormpath' */ }
 
-export default class Header extends React.Component {
+const Header = React.createClass({
+  handleSearchTermEvent (event) {
+    console.log(this.props)
+    this.props.handleSearchTermChange(event.target.value)
+  },
   render() {
+    let utilSpace
+    if (this.props.showSearch) {
+      utilSpace = <div className="navbar-form navbar-right"><div className="form-group"><input type='text' placeholder='search' className="form-control" value={this.props.searchTerm} onChange={this.handleSearchTermEvent} /></div></div>
+    } else {
+      utilSpace = <span></span>
+    }
     return (
       <nav className="navbar navbar-default navbar-static-top">
         <div className="container">
@@ -13,6 +23,7 @@ export default class Header extends React.Component {
                 <img src="imgs/choco-logo.png" />
               </Link>
             </div>
+            {utilSpace}
             <ul className="nav navbar-nav navbar-right">
               {/*
               <NotAuthenticated>
@@ -32,4 +43,6 @@ export default class Header extends React.Component {
       </nav>
     );
   }
-}
+})
+
+module.exports = Header

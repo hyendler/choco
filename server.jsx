@@ -25,11 +25,11 @@ app.use(require('webpack-dev-middleware')(compiler, {
 }));
 
 //storm path
-app.use(stormpath.init(app, {
-  web: {
-    produces: ['application/json']
-  }
-}));
+// app.use(stormpath.init(app, {
+//   web: {
+//     produces: ['application/json']
+//   }
+// }));
 
 //body parser
 app.use(bodyParser.urlencoded({extended: true}))
@@ -78,13 +78,13 @@ app.get('*', (req, res) => {
 
 
 //server
-app.on('stormpath.ready', function () {
+// app.on('stormpath.ready', function () {
   app.listen(3000, 'localhost', function (err) {
     if (err) {
       return console.error(err);
     }
     console.log('Listening at http://localhost:3000');
   });
-});
+// });
 
 export default app
