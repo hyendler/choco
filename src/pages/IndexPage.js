@@ -3,27 +3,23 @@ import React, { PropTypes } from 'react'
 import ChocolateList from '../components/ChocolateList'
 import NewChocolateCard from '../components/NewChocolateCard'
 import Header from './Header';
-import data from '../../static/data'
+import { connector } from '../store'
 
 
 
-const IndexPage = React.createClass ({
+const IndexPage = React.createClass({
   getInitialState () {
   	return {
-  		searchTerm: ""
+  		searchTerm: "",
+  		data: {}
   	}
-  },
-  handleSearchTermChange (searchTerm) {
-  	this.setState({ searchTerm })
   },
   render() {
     return (
       <div>
-      	<Header handleSearchTermChange={this.handleSearchTermChange}
-      		searchTerm={this.state.searchTerm} 
-      		showSearch />
+      	<Header showSearch />
       	<div>
-        	<ChocolateList data={data} searchTerm={this.state.searchTerm} />
+        	<ChocolateList chocolates={this.props.chocolates} searchTerm={this.props.searchTerm} />
         	<NewChocolateCard />
         </div>
       </div>
@@ -31,4 +27,4 @@ const IndexPage = React.createClass ({
   }
 })
 
-module.exports = IndexPage
+module.exports = connector(IndexPage)

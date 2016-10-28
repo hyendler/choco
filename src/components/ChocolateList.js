@@ -5,7 +5,7 @@ export default class ChocolateList extends React.Component {
 	render() {
 		return (
 			<div className="chocolateList">
-				{this.props.data.chocolates.filter((chocolate) => `${chocolate.name} ${chocolate.company} ${chocolate.variety} ${chocolate.notes} ${chocolate.beanOrigin}`.toUpperCase().indexOf(this.props.searchTerm.toUpperCase()) >= 0)
+				{this.props.chocolates.filter((chocolate) => `${chocolate.name} ${chocolate.company} ${chocolate.variety} ${chocolate.notes} ${chocolate.beanOrigin}`.toUpperCase().indexOf(this.props.searchTerm.toUpperCase()) >= 0)
 					.map((chocolate) => (
 					<ChocolateCard {...chocolate} key={chocolate.id} />
 				))}

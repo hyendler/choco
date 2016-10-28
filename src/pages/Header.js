@@ -1,11 +1,12 @@
 import React from 'react'
 import { Link } from 'react-router'
+import { connector } from '../store'
 { /* import { LoginLink, LogoutLink, Authenticated, NotAuthenticated } from 'react-stormpath' */ }
 
 const Header = React.createClass({
   handleSearchTermEvent (event) {
     console.log(this.props)
-    this.props.handleSearchTermChange(event.target.value)
+    this.props.setSearchTerm(event.target.value)
   },
   render() {
     let utilSpace
@@ -45,4 +46,4 @@ const Header = React.createClass({
   }
 })
 
-module.exports = Header
+module.exports = connector(Header)

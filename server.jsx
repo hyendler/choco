@@ -11,12 +11,14 @@ var cookieParser = require('cookie-parser')
 var bodyParser  = require('body-parser')
 var compiler    = webpack(config);
 var chocolate   = require('./server/model/chocolates')
-var chocolateController = require('./server/routes/chocolates_controller')
+var chocolatesController = require('./server/routes/chocolates_controller')
 
 import React from 'react'
 import { renderToString } from 'react-dom/server';
 import { match, RouterContext, createRoutes } from 'react-router';
 import appRouter from './src/routes';
+import { Provider } from 'react-redux';
+import {store} from './src/store'
 
 // webpack
 app.use(require('webpack-dev-middleware')(compiler, {
@@ -42,6 +44,8 @@ app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, '/src/views'));
 const routes = createRoutes(appRouter());
 
+// app.use('/api', chocolatesController)
+
 app.get('*', (req, res) => {
   match({routes, location: req.url}, (error, redirectLocation, renderProps) => {
     if (error) {
@@ -49,7 +53,7 @@ app.get('*', (req, res) => {
     } else if (redirectLocation) {
       res.redirect(302, redirectLocation.pathname + redirectLocation.search);
     } else if (renderProps) {
-      const markup = renderToString(<RouterContext {...renderProps}/>);
+      const markup = renderToString(<Provider store={store}><RouterContext {...renderProps}/></Provider>);
       res.render('index', {title: 'Express', data: false, markup});
     } else {
       res.status(404).send('Not Found');
@@ -57,20 +61,6 @@ app.get('*', (req, res) => {
   });
 });
 
-// app.get('/chocolates', (req, res) => {
-//   match({routes, location: req.url}, (error, redirectLocation, renderProps) => {
-//     if (error) {
-//       res.status(500).send(error.message);
-//     } else if (redirectLocation) {
-//       res.redirect(302, redirectLocation.pathname + redirectLocation.search);
-//     } else if (renderProps) {
-//       const markup = renderToString(<RouterContext {...renderProps}/>);
-//       res.render('index', {title: 'Express', data: false, markup});
-//     } else {
-//       res.status(404).send('Not Found');
-//     }
-//   });
-// });
 
 
 
