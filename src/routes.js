@@ -21,10 +21,8 @@ const AppRouter = () => {
 					<IndexRoute store={store} component={IndexPage} />
 					{ /* <LoginRoute path='/login' component={LoginPage} />
 					<Route path="/register" component={RegistrationPage} /> */ }
-					<Route path="/chocolates">
-						<Route path="/new" component={NewChocolatePage} />
+							<Route path="/chocolates/new" component={NewChocolatePage} />
 						<Route path="/chocolates/:id" component={ChocolateDetailsPage} />
-					</Route>
 				</Route>
 			</Router>
 		</Provider>
