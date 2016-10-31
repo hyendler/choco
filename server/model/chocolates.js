@@ -11,4 +11,4 @@ var chocolateSchema = new mongoose.Schema({
 	img: String
 })
 
-export default mongoose.model("Chocolate", chocolateSchema)
+module.exports = mongoose.model("Chocolate", chocolateSchema)

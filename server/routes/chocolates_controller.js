@@ -21,7 +21,7 @@ router.route('/chocolates')
   //GET all blobs
   .get(function(req, res, next) {
       //retrieve all blobs from Monogo
-    mongoose.model('Chocolate').find(function (err, chocolates) {
+    Chocolate.find(function (err, chocolates) {
       if (err) {
         return console.error(err);
       } else {

@@ -5,7 +5,7 @@ var express     = require('express');
 var stormpath   = require('express-stormpath');
 var app         = express();
 var path        = require('path');
-var db          = require('./server/model/db')
+// var db          = require('./server/model/db')
 var logger      = require('morgan')
 var cookieParser = require('cookie-parser')
 var bodyParser  = require('body-parser')
@@ -19,6 +19,9 @@ import { match, RouterContext, createRoutes } from 'react-router';
 import appRouter from './src/routes';
 import { Provider } from 'react-redux';
 import {store} from './src/store'
+
+var mongoose = require('mongoose');
+mongoose.connect('mongodb://localhost/choco');
 
 // webpack
 app.use(require('webpack-dev-middleware')(compiler, {
@@ -44,7 +47,7 @@ app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, '/src/views'));
 const routes = createRoutes(appRouter());
 
-// app.use('/api', chocolatesController)
+app.use('/api', chocolatesController)
 
 app.get('*', (req, res) => {
   match({routes, location: req.url}, (error, redirectLocation, renderProps) => {
