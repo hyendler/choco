@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router'
-import { connector } from '../store'
-{ /* import { LoginLink, LogoutLink, Authenticated, NotAuthenticated } from 'react-stormpath' */ }
+import { connect } from 'react-redux';
+
 
 const Header = React.createClass({
   handleSearchTermEvent (event) {
@@ -25,20 +25,6 @@ const Header = React.createClass({
               </Link>
             </div>
             {utilSpace}
-            <ul className="nav navbar-nav navbar-right">
-              {/*
-              <NotAuthenticated>
-                <li>
-                  <LoginLink />
-                </li>
-              </NotAuthenticated>
-              <NotAuthenticated>
-                <li>
-                  <Link to="/register">Register</Link>
-                </li>
-              </NotAuthenticated>
-              */}
-            </ul>
           </div>
         </div>
       </nav>
@@ -46,4 +32,4 @@ const Header = React.createClass({
   }
 })
 
-module.exports = connector(Header)
+module.exports = connect(Header)

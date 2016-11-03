@@ -1,7 +1,13 @@
 import React from 'react';
 import ChocolateCard from '../components/ChocolateCard'
+import * as chocolateApi from '../api/chocolates-api'
+import store from '../store'
+import { connect } from 'react-redux';
 
-export default class ChocolateList extends React.Component {
+const ChocolateList = React.createClass({
+	componentDidMount: function () {
+		chocolateApi.getChocolates();
+	},
 	render() {
 		return (
 			<div className="chocolateList">
@@ -12,4 +18,16 @@ export default class ChocolateList extends React.Component {
 			</div>
 		)
 	}
+})
+
+const mapStateToProps = function(store) {
+	return {
+		chocolates: store.chocolateState.chocolates
+	}
 }
+
+console.log("ChocolateList", ChocolateList)
+console.log("ChocolateList mapStateToProps", connect(mapStateToProps))
+console.log("ChocolateList mapStateToProps", connect(mapStateToProps)(ChocolateList))
+
+export default connect(mapStateToProps)(ChocolateList)

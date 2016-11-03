@@ -1,16 +1,17 @@
 import React from 'react'
 import Header from './Header'
-import { connector } from '../store'
+import * as chocolateApi from '../api/chocolates-api'
+import store from '../store'
+import { connect } from 'react-redux';
 
 
-class ChocolateDetailsPage extends React.Component {
-	assignChocolate(id) {
-		id = parseInt(id)
-		const chocolateArray = this.props.chocolates.filter((chocolate) => chocolate.id === id)
-		return chocolateArray[0]
-	}
+const ChocolateDetailsPage = React.createClass({
+	componentDidMount: function () {
+		let chocolateId = this.props.params.chocolateId
+		chocolateApi.getSingleChocolate();
+	},
 	render() {
-		const {name, company, beanOrigin, percentage, variety, rating, notes, img} = this.assignChocolate(this.props.params.id)
+		const {name, company, beanOrigin, percentage, variety, rating, notes, img} = this.props.chocolate;
 		return (
 			<div>
 				<Header />
@@ -28,6 +29,13 @@ class ChocolateDetailsPage extends React.Component {
 			</div>
 		)
 	}
+})
+
+const mapStateToProps = function(store) {
+	return {
+		chocolate: store.chocolateState.chocolate
+	}
 }
 
-module.exports = connector(ChocolateDetailsPage)
+
+module.exports = connect(mapStateToProps)(ChocolateDetailsPage)
