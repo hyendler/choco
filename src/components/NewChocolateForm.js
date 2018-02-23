@@ -2,7 +2,16 @@ import React from 'react'
 
 const NewChocolateForm = React.createClass({
 	getInitialState: function () {
-		return { company: '', beanOrigin: '', ingredients: '', percentage: '', variety: '', notes: '', img: '', rating: ''}
+		return { 
+			company: '',
+			beanOrigin: '',
+			ingredients: '',
+			percentage: '',
+			variety: '',
+			notes: '',
+			img: '',
+			rating: ''
+		}
 	},
 	handleChange: function (key) {
 		return function(e) {

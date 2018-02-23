@@ -7,10 +7,12 @@ import Header from './Header'
 export default class NewChocolatePage extends React.Component {
   render() {
     return (
-      <div className="container">
-      	<Header />
-      	<NewChocolateForm />       
-      </div>
+    <div>
+        <Header />
+        <div className="container">
+      	    <NewChocolateForm />       
+        </div>
+    </div>
     )
   }
 }

@@ -10,8 +10,8 @@ var logger      = require('morgan')
 var cookieParser = require('cookie-parser')
 var bodyParser  = require('body-parser')
 var compiler    = webpack(config);
-var chocolate   = require('./server/model/chocolates')
-var chocolatesController = require('./server/routes/chocolates_controller')
+var chocolatesController = require('./server/routes/chocolates_controller');
+var dummyData = require('./dummyData');
 
 import React from 'react'
 import { renderToString } from 'react-dom/server';
@@ -21,20 +21,26 @@ import { Provider } from 'react-redux';
 import {store} from './src/store'
 
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/choco');
+mongoose.connect('mongodb://127.0.0.1:27017/choco', (error) => {
+  if (error) {
+    console.error('Please make sure Mongodb is running!');
+    throw error;
+  }
+
+  //feed dummy data
+  dummyData();
+});
+
+var db = mongoose.connection;
+db.once('open', () => {
+  console.log('Connected to MongoDB server');
+});
 
 // webpack
 app.use(require('webpack-dev-middleware')(compiler, {
   noInfo: true,
   publicPath: config.output.publicPath
 }));
-
-//storm path
-// app.use(stormpath.init(app, {
-//   web: {
-//     produces: ['application/json']
-//   }
-// }));
 
 //body parser
 app.use(bodyParser.urlencoded({extended: true}))
@@ -56,6 +62,7 @@ app.get('*', (req, res) => {
     } else if (redirectLocation) {
       res.redirect(302, redirectLocation.pathname + redirectLocation.search);
     } else if (renderProps) {
+      //pureJS react React.createclass (no jsx)
       const markup = renderToString(<Provider store={store}><RouterContext {...renderProps}/></Provider>);
       res.render('index', {title: 'Express', data: false, markup});
     } else {
@@ -64,20 +71,12 @@ app.get('*', (req, res) => {
   });
 });
 
-
-
-
-
-
-
 //server
-// app.on('stormpath.ready', function () {
-  app.listen(3000, 'localhost', function (err) {
-    if (err) {
-      return console.error(err);
-    }
-    console.log('Listening at http://localhost:3000');
-  });
-// });
+app.listen(3000, 'localhost', function (err) {
+  if (err) {
+    return console.error(err);
+  }
+  console.log('Listening at http://localhost:3000');
+});
 
 export default app

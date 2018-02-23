@@ -3,7 +3,7 @@ var express = require('express'),
     mongoose = require('mongoose'), //mongo connection
     bodyParser = require('body-parser'), //parses information from POST
     methodOverride = require('method-override'), //used to manipulate POST
-    Chocolate = require('../model/chocolates')
+    Chocolate = require('../model/chocolate')
 
 router.use(bodyParser.urlencoded({ extended: true }))
 
